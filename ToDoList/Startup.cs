@@ -26,6 +26,8 @@ namespace ToDoList
 
             services.AddDbContext<AppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("")));
 
+            services.AddSingleton<ITaskDbProvider, TaskDbProvider>();
+
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
