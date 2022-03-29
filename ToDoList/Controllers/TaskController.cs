@@ -23,10 +23,10 @@ namespace ToDoList.Controllers
         }
 
         [HttpPost]
-        public ActionResult<int> Post(Task task)
+        public ActionResult<int> Post([FromBody] Task task)
         {
             var response = _taskDbProvider.StoreTaskDetails(task);
-            return Ok();
+            return Ok(response);
         }
     }
 }

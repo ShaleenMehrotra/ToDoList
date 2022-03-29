@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
 
 namespace ToDoList
 {
@@ -26,6 +27,11 @@ namespace ToDoList
 
             services.AddDbContext<AppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("")));
 
+            services.AddSwaggerGen(options =>
+            {
+                options.SwaggerDoc("v1", new OpenApiInfo { Title = "ToDoList API", Version = "v1" });
+            });
+                
             services.AddSingleton<ITaskDbProvider, TaskDbProvider>();
 
             // In production, the React files will be served from this directory
@@ -48,6 +54,12 @@ namespace ToDoList
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseSwagger();
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/swagger/v1/swagger.json", "ToDoList v1");
+            });
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
