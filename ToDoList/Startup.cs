@@ -2,7 +2,6 @@ using DataProvider;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,17 +21,14 @@ namespace ToDoList
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllersWithViews();
-
-            services.AddDbContext<AppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("")));
 
             services.AddSwaggerGen(options =>
             {
                 options.SwaggerDoc("v1", new OpenApiInfo { Title = "ToDoList API", Version = "v1" });
             });
                 
-            services.AddSingleton<ITaskDbProvider, TaskDbProvider>();
+            services.AddSingleton<IDbProvider, DbProvider>();
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
