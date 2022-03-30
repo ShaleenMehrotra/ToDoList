@@ -10,7 +10,7 @@ import './custom.css'
 export default function App() {
     return (
         <Layout>
-            <Route exact path='/todolist' component={ToDoList} />
+            <Route exact path='/' component={ToDoList} />
             <Route path='/add-task' component={Counter} />
             <Route path='/delete-task' component={FetchData} />
         </Layout>
