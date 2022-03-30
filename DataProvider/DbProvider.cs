@@ -1,14 +1,15 @@
 ﻿using Microsoft.Data.Sqlite;
-using Models;
+using Models.Request;
 using System;
+using System.Collections.Generic;
 
 namespace DataProvider
 {
     public interface IDbProvider
     {
         int StoreTaskDetails(Task task);
-        Task RetrieveTaskDetails(int id);
-        void DeleteTaskDetails(int id);
+        List<Task> RetrieveTaskDetails();
+        int DeleteTaskDetails(int id);
     }
 
     public class DbProvider : DbProviderBase, IDbProvider
@@ -19,75 +20,88 @@ namespace DataProvider
 
         }
 
-        public Task RetrieveTaskDetails(int id)
+        public List<Task> RetrieveTaskDetails()
         {
-            var task = new Task();
+            var tasks = new List<Task>();
 
-            try
+            using (var connection = new SqliteConnection(_connectionString))
             {
-                using (var connection = new SqliteConnection(_connectionString))
+                connection.Open();
+
+                var readTableCommand = connection.CreateCommand();
+                readTableCommand.CommandText = $"SELECT * FROM TODOLIST;";
+
+                using (var reader = readTableCommand.ExecuteReader())
                 {
-                    connection.Open();
-
-                    var readTableCommand = connection.CreateCommand();
-                    readTableCommand.CommandText = $"SELECT * FROM TODOLIST WHERE id = {id};";
-
-                    using (var reader = readTableCommand.ExecuteReader())
+                    while (reader.Read())
                     {
-                        while (reader.Read())
+                        var task = new Task
                         {
-                            task.Id = Convert.ToInt32(reader.GetValue(0));
-                            task.Description = reader.GetValue(1).ToString();
-                            task.CreatedDate = Convert.ToDateTime(reader.GetValue(2));
-                        }
+                            Id = Convert.ToInt32(reader.GetValue(0)),
+                            Description = reader.GetValue(1).ToString(),
+                            CreatedDate = Convert.ToDateTime(reader.GetValue(2))
+                        };
+
+                        tasks.Add(task);
                     }
                 }
             }
-            catch (Exception exception)
-            {
-                Console.WriteLine(exception.Message);
-            }
 
-            return task;
+            return tasks;
         }
 
         public int StoreTaskDetails(Task task)
         {
-            try
+            int rowsAffected = 0;
+
+            using (var connection = new SqliteConnection(_connectionString))
             {
-                using (var connection = new SqliteConnection(_connectionString))
+                connection.Open();
+
+                using (var transaction = connection.BeginTransaction())
                 {
-                    connection.Open();
+                    var updateTableCommand = connection.CreateCommand();
+                    updateTableCommand.CommandText = $"INSERT INTO TODOLIST VALUES({task.Id}, \'{task.Description}\', \'{task.CreatedDate:yyyy-MM-dd HH:mm:ss}\');";
 
-                    using (var transaction = connection.BeginTransaction())
-                    {
-                        var updateTableCommand = connection.CreateCommand();
-                        updateTableCommand.CommandText = $"INSERT INTO TODOLIST VALUES({task.Id}, \'{task.Description}\', \'{task.CreatedDate:yyyy-MM-dd HH:mm:ss}\');";
+                    rowsAffected = updateTableCommand.ExecuteNonQuery();
 
-                        updateTableCommand.ExecuteNonQuery();
-
-                        transaction.Commit();
-                    }
+                    transaction.Commit();
                 }
             }
-            catch (Exception exception)
+
+            if (rowsAffected == 0)
             {
-                Console.WriteLine(exception.Message);
+                return 0;
             }
 
             return task.Id;
         }
 
-        public void DeleteTaskDetails(int id)
+        public int DeleteTaskDetails(int id)
         {
+            int rowsAffected = 0;
+
             using (var connection = new SqliteConnection(_connectionString))
             {
                 connection.Open();
 
-                var updateTableCommand = connection.CreateCommand();
-                updateTableCommand.CommandText = "CREATE TABLE TODOLIST(id INTEGER PRIMARY KEY, description TEXT NOT NULL, created_date DATETIME, last_updated_date DATETIME);";
-                updateTableCommand.ExecuteNonQuery();
+                using (var transaction = connection.BeginTransaction())
+                {
+                    var updateTableCommand = connection.CreateCommand();
+                    updateTableCommand.CommandText = $"DELETE FROM TODOLIST WHERE id = {id};";
+
+                    rowsAffected = updateTableCommand.ExecuteNonQuery();
+
+                    transaction.Commit();
+                }
             }
+
+            if (rowsAffected == 0)
+            {
+                return 0;
+            }
+
+            return rowsAffected;
         }
     }
 }
