@@ -11,7 +11,7 @@ using System.Linq;
 namespace ToDoList.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("tasks")]
     public class TaskController : ControllerBase
     {
         private readonly IDbProvider _dbProvider;
