@@ -1,4 +1,4 @@
-﻿export const getDellCustomerNumbers = async (apexPayload) => {
+﻿export const addTask = async (taskPayload) => {
     const headers = {
         method: 'POST',
         headers: {
@@ -6,10 +6,10 @@
         }
     }
 
-    apexPayload && (headers.body = JSON.stringify(apexPayload));
+    taskPayload && (headers.body = JSON.stringify(taskPayload));
 
     try {
-        const result = await fetch(`${""}`, headers).then(res => res.json());
+        const result = await fetch(`${"tasks"}`, headers).then(res => res.json());
         return result;
     } catch (error) {
         throw new Error(error.message);
