@@ -9,7 +9,23 @@
     taskPayload && (headers.body = JSON.stringify(taskPayload));
 
     try {
-        const result = await fetch(`${"tasks"}`, headers).then(res => res.json());
+        const result = await fetch(`tasks`, headers).then(res => res.json());
+        return result;
+    } catch (error) {
+        throw new Error(error.message);
+    }
+}
+
+export const deleteTask = async (taskPayload) => {
+    const headers = {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+        }
+    }
+
+    try {
+        const result = await fetch(`tasks/id?id=${taskPayload.id}`, headers).then(res => res.json());
         return result;
     } catch (error) {
         throw new Error(error.message);

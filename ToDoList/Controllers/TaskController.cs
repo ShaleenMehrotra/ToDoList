@@ -99,7 +99,7 @@ namespace ToDoList.Controllers
             return StatusCode(201, addTasksResponse);
         }
 
-        [HttpDelete]
+        [HttpDelete("id")]
         [ProducesResponseType(typeof(ApiResponseBase), StatusCodes.Status200OK)]
         [ProducesResponseType(typeof(ApiResponseBase), StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ApiResponseBase), StatusCodes.Status500InternalServerError)]
