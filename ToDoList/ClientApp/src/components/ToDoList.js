@@ -131,11 +131,10 @@ const ToDoList = () => {
         try {
             let result = await getAllTasks();
             if (result) {
-                result = result.filter((item) => item.dellCustomerNumber)
                 setShowTasks(true);
                 setTasksFetched(false);
                 setPage(0);
-                setTasks(result);
+                setTasks(result.tasks);
             }
         } catch (error) {
             setTasksFetched(false);
@@ -151,7 +150,7 @@ const ToDoList = () => {
                             <SimpleHeader title="To-Do List" description="This page displays all the tasks in the todo list" />
                         </Box>
                         <Box justifyContent="space-around" alignItems="flex-start">
-                            <LoadingButton isLoading={tasksFetched} variant="contained" type="submit" color="primary" size="medium">Show All Tasks</LoadingButton>
+                            <LoadingButton isLoading={tasksFetched} variant="contained" type="submit" color="primary" size="medium">All Tasks</LoadingButton>
                         </Box>
                         <Grid container item style={{ width: '100%', marginTop: '20px' }}>
                             {
