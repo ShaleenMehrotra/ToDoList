@@ -2,6 +2,7 @@
 using Models.Request;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DataProvider
 {
@@ -12,13 +13,10 @@ namespace DataProvider
         int DeleteTaskDetails(int id);
     }
 
+    [ExcludeFromCodeCoverage]
     public class DbProvider : DbProviderBase, IDbProvider
     {
-
-        public DbProvider() : base()
-        {
-
-        }
+        public DbProvider() : base() { }
 
         public List<Task> RetrieveTaskDetails()
         {
