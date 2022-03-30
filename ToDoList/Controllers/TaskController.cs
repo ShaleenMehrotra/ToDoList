@@ -51,10 +51,10 @@ namespace ToDoList.Controllers
 
             if (tasks == null || !tasks.Any())
             {
-                return StatusCode(404, getTasksResponse);
+                return NotFound(getTasksResponse);
             }
 
-            return StatusCode(200, getTasksResponse);
+            return Ok(getTasksResponse);
         }
 
         [HttpPost]
@@ -93,7 +93,7 @@ namespace ToDoList.Controllers
 
             if (taskId == 0)
             {
-                return StatusCode(404, addTasksResponse);
+                return NotFound(addTasksResponse);
             }
 
             return StatusCode(201, addTasksResponse);
@@ -133,10 +133,10 @@ namespace ToDoList.Controllers
 
             if (rowsAffected == 0)
             {
-                return StatusCode(404, apiResponseBase);
+                return NotFound(apiResponseBase);
             }
 
-            return StatusCode(200, apiResponseBase);
+            return Ok(apiResponseBase);
         }
     }
 }
