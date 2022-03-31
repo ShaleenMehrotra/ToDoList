@@ -98,10 +98,10 @@ TablePaginationActions.propTypes = {
 const tableColumns = [
     { id: 'id', label: 'Task Id' },
     { id: 'description', label: 'Description' },
-    { id: 'createdDate', label: 'Created Date' }
+    { id: 'lastUpdatedDate', label: 'Last Updated Date' }
 ];
 
-const ToDoList = () => {
+const Tasks = () => {
     const classes = useStyles();
     const minDataLength = 1;
 
@@ -145,7 +145,7 @@ const ToDoList = () => {
         <Container maxWidth="xl" className={classes.container}>
             <form className='add-form' noValidate autoComplete="off" onSubmit={populateTasks}>
                 <Grid container direction={"row"} justifyContent="space-between" alignItems="flex-start">
-                    <Grid container item direction={"column"} xs={12} sm={12} md={5} xl={5}>
+                    <Grid container item direction={"column"} xs={12} sm={12} md={10} xl={10}>
                         <Box className={classes.title}>
                             <SimpleHeader title="Tasks" description="This page displays all the tasks in the todo list on clicking the button below." />
                         </Box>
@@ -176,7 +176,7 @@ const ToDoList = () => {
                                                     <TableRow style={{ cursor: 'pointer' }} key={index} hover>
                                                         <TableCell align="center">{task.id}</TableCell>
                                                         <TableCell align="center">{task.description}</TableCell>
-                                                        <TableCell align="center">{task.createdDate}</TableCell>
+                                                        <TableCell align="center">{task.lastUpdatedDate.replace('T', '  ')}</TableCell>
                                                     </TableRow>
                                                 ))}
                                             </TableBody>
@@ -211,4 +211,4 @@ const ToDoList = () => {
     )
 }
 
-export default ToDoList;
+export default Tasks;

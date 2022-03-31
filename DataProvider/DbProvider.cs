@@ -37,7 +37,7 @@ namespace DataProvider
                         {
                             Id = Convert.ToInt32(reader.GetValue(0)),
                             Description = reader.GetValue(1).ToString(),
-                            CreatedDate = Convert.ToDateTime(reader.GetValue(2))
+                            LastUpdatedDate = Convert.ToDateTime(reader.GetValue(2))
                         };
 
                         tasks.Add(task);
@@ -52,6 +52,12 @@ namespace DataProvider
         {
             int rowsAffected = 0;
 
+            string insertQuery = $"INSERT INTO TODOLIST VALUES({task.Id}, \'{task.Description}\', \'{task.LastUpdatedDate:yyyy-MM-dd HH:mm:ss}\');";
+            string updateQuery = $"UPDATE TODOLIST SET description = \'{task.Description}\', last_updated_date = \'{task.LastUpdatedDate:yyyy-MM-dd HH:mm:ss}\' WHERE id = {task.Id};";
+
+            // If task id already exists, update the description
+            string commandText = TaskIdExists(task.Id) ? updateQuery : insertQuery;
+
             using (var connection = new SqliteConnection(_connectionString))
             {
                 connection.Open();
@@ -59,7 +65,7 @@ namespace DataProvider
                 using (var transaction = connection.BeginTransaction())
                 {
                     var updateTableCommand = connection.CreateCommand();
-                    updateTableCommand.CommandText = $"INSERT INTO TODOLIST VALUES({task.Id}, \'{task.Description}\', \'{task.CreatedDate:yyyy-MM-dd HH:mm:ss}\');";
+                    updateTableCommand.CommandText = commandText;
 
                     rowsAffected = updateTableCommand.ExecuteNonQuery();
 
@@ -100,6 +106,29 @@ namespace DataProvider
             }
 
             return rowsAffected;
+        }
+
+        private bool TaskIdExists(int id)
+        {
+            bool existsId = false;
+
+            using (var connection = new SqliteConnection(_connectionString))
+            {
+                connection.Open();
+
+                var readTableCommand = connection.CreateCommand();
+                readTableCommand.CommandText = $"SELECT * FROM TODOLIST WHERE id = {id};";
+
+                using (var reader = readTableCommand.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        existsId = true;
+                    }
+                }
+            }
+
+            return existsId;
         }
     }
 }

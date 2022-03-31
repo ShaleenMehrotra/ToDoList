@@ -79,6 +79,12 @@ namespace ToDoList.Controllers
 
             try
             {
+                // Adding this so that default date and time is not entered in the database
+                if(task.LastUpdatedDate == DateTime.MinValue)
+                {
+                    task.LastUpdatedDate = DateTime.Now;
+                }
+
                 taskId = _dbProvider.StoreTaskDetails(task);
             }
             catch (Exception exception)

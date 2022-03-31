@@ -38,7 +38,7 @@ namespace ToDoList
                     connection.Open();
 
                     var createTableCommand = connection.CreateCommand();
-                    createTableCommand.CommandText = "CREATE TABLE TODOLIST(id INTEGER PRIMARY KEY, description TEXT NOT NULL, created_date DATETIME NOT NULL);";
+                    createTableCommand.CommandText = "CREATE TABLE TODOLIST(id INTEGER PRIMARY KEY, description TEXT NOT NULL, last_updated_date DATETIME NOT NULL);";
                     createTableCommand.ExecuteNonQuery();
                 }
             }

@@ -34,13 +34,13 @@ namespace UnitTests
                 {
                     Id = 1,
                     Description = "Task 1",
-                    CreatedDate = DateTime.Now
+                    LastUpdatedDate = DateTime.Now
                 },
                 new Task
                 {
                     Id = 2,
                     Description = "Task 2",
-                    CreatedDate = DateTime.Now
+                    LastUpdatedDate = DateTime.Now
                 }
             };
 

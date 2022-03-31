@@ -52,8 +52,8 @@ const DeleteTask = () => {
     return (
         <Container maxWidth="xl" className={classes.container}>
             <form className='add-form' noValidate autoComplete="off" onSubmit={populateTasks}>
-                <Grid container direction={"column"} justifyContent="space-between" alignItems="flex-start">
-                    <Grid container item xs={12} sm={12} md={5} xl={5}>
+                <Grid container direction={"row"} justifyContent="space-between" alignItems="flex-start">
+                    <Grid container item direction={"column"} xs={12} sm={12} md={10} xl={10}>
                         <Box className={classes.title}>
                             <SimpleHeader title="Delete Task" description="This page deletes a task from the database based on the task id." />
                         </Box>
@@ -62,8 +62,8 @@ const DeleteTask = () => {
                             <LoadingButton isLoading={tasksFetched} variant="contained" type="submit" color="primary" size="medium">Delete</LoadingButton>
                         </Box>
                     </Grid>
-                    <Grid container item xs={12} sm={12} md={6} xl={6}>
-                        <h3>{resultMessage}</h3>
+                    <Grid container item xs={12} sm={12} md={6} xl={6} style={{ marginTop: 30 }}>
+                        <p><strong>{resultMessage}</strong></p>
                     </Grid>
                 </Grid>
             </form >

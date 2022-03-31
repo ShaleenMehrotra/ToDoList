@@ -56,19 +56,19 @@ const AddTask = () => {
     return (
         <Container maxWidth="xl" className={classes.container}>
             <form className='add-form' noValidate autoComplete="off" onSubmit={populateTasks}>
-                <Grid container direction={"column"} justifyContent="space-between" alignItems="flex-start">
-                    <Grid container item xs={12} sm={12} md={5} xl={5}>
+                <Grid container direction={"row"} justifyContent="space-between" alignItems="flex-start">
+                    <Grid container item direction={"column"} xs={12} sm={12} md={10} xl={10}>
                         <Box className={classes.title}>
                             <SimpleHeader title="Add Task" description="This page adds a new task to the database." />
                         </Box>
                         <Box justifyContent="space-around" alignItems="flex-start">
                             <TextField style={{ paddingRight: 20 }} id="standard-basic" label="Id" value={id} onChange={handleIdChange} />
-                            <TextField style={{ paddingRight: 2 }} id="standard-basic" label="Description" value={description} onChange={handleDescriptionChange} />
+                            <TextField style={{ paddingRight: 20 }} id="standard-basic" label="Description" value={description} onChange={handleDescriptionChange} />
                             <LoadingButton isLoading={tasksFetched} variant="contained" type="submit" color="primary" size="medium">Add</LoadingButton>
                         </Box>
                     </Grid>
-                    <Grid container item xs={12} sm={12} md={6} xl={6}>
-                        <h3>{resultMessage}</h3>
+                    <Grid container item xs={12} sm={12} md={6} xl={6} style={{ marginTop: 30 }}>
+                        <p><strong>{resultMessage}</strong></p>
                     </Grid>
                 </Grid>
             </form >
