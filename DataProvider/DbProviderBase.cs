@@ -1,7 +1,10 @@
 ﻿using Microsoft.Data.Sqlite;
+using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace DataProvider
 {
+    [ExcludeFromCodeCoverage]
     public class DbProviderBase
     {
         protected readonly string _connectionString = "";
@@ -10,7 +13,7 @@ namespace DataProvider
         {
             var connectionStringBuilder = new SqliteConnectionStringBuilder
             {
-                DataSource = "../DataProvider/Database.db"
+                DataSource = Environment.GetEnvironmentVariable("CONNECTION_STRING")
             };
 
             _connectionString = connectionStringBuilder.ConnectionString;
