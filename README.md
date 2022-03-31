@@ -1,4 +1,4 @@
-# ASP.NET Core and React SPA ToDo List Application
+# ASP.NET Core and React SPA ToDoList Application
 
 This is a todo list application built using ASP.NET Core 5.0 for a REST/JSON API server and React for a web client.
 
@@ -28,14 +28,14 @@ This application was developed and tested on  Windows.
 2. Clone this repository.
 3. Run `npm install`
 4. If you have Visual Studio to view this project:
-   - Go inside ..\ToDoList folder.
+   - Go inside `..\ToDoList` folder.
    - Open the ToDoList.sln file.
    - Run the project.
    - You will be navigated to [http://localhost:5001](http://localhost:5001).
    - UI screens can be viewed on [http://localhost:5001](http://localhost:5001).
    - API (Swagger) can be viewed on [http://localhost:5001/swagger/index.html](http://localhost:5001/swagger/index.html).
 5. If you are using command line to run this project:
-   - Go inside ..\ToDoList\ToDoList folder.
+   - Go inside `..\ToDoList\ToDoList` folder.
    - Open command line at this location.
    - Run the command `dotnet run`.
    - Navigate to [http://localhost:5001](http://localhost:5001).
