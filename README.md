@@ -31,9 +31,9 @@ This application was developed and tested on  Windows.
    - Go inside `..\ToDoList` folder.
    - Open the ToDoList.sln file.
    - Run the project.
-   - You will be navigated to [http://localhost:5001](http://localhost:5001).
-   - UI screens can be viewed on [http://localhost:5001](http://localhost:5001).
-   - API (Swagger) can be viewed on [http://localhost:5001/swagger/index.html](http://localhost:5001/swagger/index.html).
+   - You will be navigated to [https://localhost:5001](https://localhost:5001).
+   - UI screens can be viewed on [https://localhost:5001](https://localhost:5001).
+   - API (Swagger) can be viewed on [https://localhost:5001/swagger/index.html](https://localhost:5001/swagger/index.html).
 5. If you are using command line to run this project:
    - Go inside `..\ToDoList\ToDoList` folder.
    - Open command line at this location.
