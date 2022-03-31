@@ -147,7 +147,7 @@ const ToDoList = () => {
                 <Grid container direction={"row"} justifyContent="space-between" alignItems="flex-start">
                     <Grid container item direction={"column"} xs={12} sm={12} md={5} xl={5}>
                         <Box className={classes.title}>
-                            <SimpleHeader title="To-Do List" description="This page displays all the tasks in the todo list" />
+                            <SimpleHeader title="Tasks" description="This page displays all the tasks in the todo list on clicking the button below." />
                         </Box>
                         <Box justifyContent="space-around" alignItems="flex-start">
                             <LoadingButton isLoading={tasksFetched} variant="contained" type="submit" color="primary" size="medium">All Tasks</LoadingButton>

@@ -59,7 +59,7 @@ const DeleteTask = () => {
                         </Box>
                         <Box justifyContent="space-around" alignItems="flex-start">
                             <TextField style={{ paddingRight: 20 }} id="standard-basic" label="Id" value={id} onChange={handleIdChange} />
-                            <LoadingButton isLoading={tasksFetched} variant="contained" type="submit" color="primary" size="medium">Delete Task</LoadingButton>
+                            <LoadingButton isLoading={tasksFetched} variant="contained" type="submit" color="primary" size="medium">Delete</LoadingButton>
                         </Box>
                     </Grid>
                     <Grid container item xs={12} sm={12} md={6} xl={6}>

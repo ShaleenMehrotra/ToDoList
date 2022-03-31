@@ -64,7 +64,7 @@ const AddTask = () => {
                         <Box justifyContent="space-around" alignItems="flex-start">
                             <TextField style={{ paddingRight: 20 }} id="standard-basic" label="Id" value={id} onChange={handleIdChange} />
                             <TextField style={{ paddingRight: 2 }} id="standard-basic" label="Description" value={description} onChange={handleDescriptionChange} />
-                            <LoadingButton isLoading={tasksFetched} variant="contained" type="submit" color="primary" size="medium">Add Task</LoadingButton>
+                            <LoadingButton isLoading={tasksFetched} variant="contained" type="submit" color="primary" size="medium">Add</LoadingButton>
                         </Box>
                     </Grid>
                     <Grid container item xs={12} sm={12} md={6} xl={6}>
