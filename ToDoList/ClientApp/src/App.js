@@ -1,22 +1,18 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Route } from 'react-router';
 import { Layout } from './components/Layout';
-import { Home } from './components/Home';
-import { FetchData } from './components/FetchData';
-import { Counter } from './components/Counter';
+import Tasks from './components/Tasks';
+import DeleteTask from './components/DeleteTask';
+import AddTask from './components/AddTask';
 
 import './custom.css'
 
-export default class App extends Component {
-  static displayName = App.name;
-
-  render () {
+export default function App() {
     return (
-      <Layout>
-        <Route exact path='/' component={Home} />
-        <Route path='/counter' component={Counter} />
-        <Route path='/fetch-data' component={FetchData} />
-      </Layout>
+        <Layout>
+            <Route exact path='/' component={Tasks} />
+            <Route path='/add-task' component={AddTask} />
+            <Route path='/delete-task' component={DeleteTask} />
+        </Layout>
     );
-  }
 }
