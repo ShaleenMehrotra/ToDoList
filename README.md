@@ -2,6 +2,7 @@
 
 This is a todo list application built using ASP.NET Core 5.0 for a REST/JSON API server and React for a web client.
 
+
 ## Overview of Tech Stack
 - Server
   - ASP.NET Core 5.0 (Microservice architecture)
@@ -13,11 +14,6 @@ This is a todo list application built using ASP.NET Core 5.0 for a REST/JSON API
   - .NET Core xUnit for unit testing
   - .NET Core xUnit for integration testing
 
-## Demo
-
-This application was developed and tested on  Windows.
-
-[![Demo Video]
 
 ## Setup
 
@@ -26,7 +22,7 @@ This application was developed and tested on  Windows.
    - [Node.js >= v16](https://nodejs.org/en/download/)
    - Visual Studio or Visual Studio Code is recommended to view the code.
 2. Clone this repository.
-3. Run `npm install`
+3. Run `npm install` after opening command line at `..\ToDoList\ToDoList\ClientApp` this location.
 4. If you have Visual Studio to view this project:
    - Go inside `..\ToDoList` folder.
    - Open the ToDoList.sln file.
@@ -42,6 +38,7 @@ This application was developed and tested on  Windows.
    - UI screens can be viewed on [http://localhost:5001](http://localhost:5001).
    - API (Swagger) can be viewed on [http://localhost:5001/swagger/index.html](http://localhost:5001/swagger/index.html).
 
+
 ## Scripts
 
 ### `npm install`
@@ -50,6 +47,3 @@ When first cloning the repo or adding new dependencies, run this command.  This 
 
 - Install Node dependencies from package.json
 - Install .NET Core dependencies from api/api.csproj and api.test/api.test.csproj (using dotnet restore)
-
-## Credits
-- My own perseverance because this took a _lot_ of time to get right 🤓
