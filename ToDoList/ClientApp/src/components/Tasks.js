@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { useTheme } from '@material-ui/core/styles';
 import { makeStyles } from '@material-ui/core/styles';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { Container, Box } from '@material-ui/core';
 import SimpleHeader from "../components/generic/SimpleHeader";
@@ -112,7 +112,18 @@ const Tasks = () => {
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
 
-    // Avoid a layout jump when reaching the last page with empty rows.
+    useEffect(() => {
+        var savedTasks = window.localStorage.getItem('tasks');
+        if (savedTasks) {
+            displayTaskTable(JSON.parse(savedTasks));
+        }
+    }, []);
+
+    useEffect(() => {
+        if (tasks && tasks.length) {
+            window.localStorage.setItem('tasks', JSON.stringify(tasks));
+        }
+    }, [tasks]);
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
@@ -131,14 +142,19 @@ const Tasks = () => {
         try {
             let result = await getAllTasks();
             if (result) {
-                setShowTasks(true);
-                setTasksFetched(false);
-                setPage(0);
-                setTasks(result.tasks);
+                displayTaskTable(result.tasks);
             }
         } catch (error) {
             setTasksFetched(false);
         }
+    }
+
+    const displayTaskTable = (result) =>
+    {
+        setShowTasks(true);
+        setTasksFetched(false);
+        setPage(0);
+        setTasks(result);
     }
 
     return (
